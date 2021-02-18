@@ -1,5 +1,11 @@
 import React from 'react'
 
+import { Layout } from 'Components'
+
 export default function Home() {
-	return <h1>ini home</h1>
+	return (
+		<Layout>
+			<h1>ini home</h1>
+		</Layout>
+	)
 }
