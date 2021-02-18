@@ -1,14 +1,14 @@
 %layout-navigation__text {
     cursor: pointer;
     color: #333333;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 600;
     text-transform: capitalize;
     border-bottom: 5px solid transparent;
     width: fit-content;
 
-    @include for-size(phone) {
-        font-size: 16px;
+    @include for-size(md) {
+        font-size: 24px;
     }
 
     &:hover {
@@ -29,46 +29,46 @@
 
 
 .layout__header {
-    z-index: 90;
-    display: flex;
-    padding: 18px 62px;
-    position: absolute;
-    width: 100%;
+    padding: 0;
+    flex-direction: column;
 
     &__menu-btn {
-        display: none;
+        display: flex;
+        padding: 12px;
+        background-color: #fff;
+        box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.75);
     }
 
-    @include for-size(phone) {
-        padding: 0;
-        flex-direction: column;
+    @include for-size(md) {
+        z-index: 90;
+        display: flex;
+        padding: 18px 62px;
+        position: absolute;
+        width: 100%;
 
         &__menu-btn {
-            display: flex;
-            padding: 12px;
-            background-color: #fff;
-            box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.75);
+            display: none;
         }
     }
 
     &__navigations {
         display: flex;
-        width: 100%;
+        flex-direction: column;
+        padding: 12px;
+        background-color: #fff;
 
-        >a:first-child {
-            margin-right: auto;
-        }
+        @include for-size(md) {
+            width: 100%;
+            flex-direction: row;
+            box-shadow: unset;
 
-        >a:not(:last-child):not(:first-child) {
-            margin-right: 32px;
-        }
+            >a:first-child {
+                margin-right: auto;
+            }
 
-        @include for-size(phone) {
-            display: flex;
-            flex-direction: column;
-            padding: 12px;
-            background-color: #fff;
-            box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.75);
+            >a:not(:last-child):not(:first-child) {
+                margin-right: 32px;
+            }
         }
     }
 
@@ -76,21 +76,25 @@
         @extend %layout-navigation__text;
 
         &--home {
+            &:after {
+                content: 'Home';
+            }
+
             img {
-                width: 31px;
-                height: 31px;
+                display: none;
 
-                @include for-size(phone) {
-                    display: none;
+                @include for-size(md) {
+                    width: 31px;
+                    height: 31px;
+                    display: inline;
                 }
             }
 
-            @include for-size(phone) {
+            @include for-size(md) {
                 &:after {
-                    content: 'Home';
+                    content: unset
                 }
             }
-
         }
     }
 
@@ -105,11 +109,10 @@
     position: fixed;
     background-color: #ffffff;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    z-index: 99;
-    padding: 18px 62px;
+    z-index: 90;
+    padding: 0px;
 
-    @include for-size(tablet) {
-        padding: 0px;
+    @include for-size(md) {
+        padding: 18px 62px;
     }
-
 }
