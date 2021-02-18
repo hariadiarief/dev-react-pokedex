@@ -2,9 +2,9 @@ import axios from 'axios'
 import { GET_POKEMON } from 'Types'
 
 export const getPokemon = (params) => (dispatch) => {
-	const { limit = 20, offset = 0 } = params
+	const { limit, offset } = params
 	axios
-		.get(`https://pokeapi.co/api/v2/pokemon?limit=${20}&offset=${0}`)
+		.get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
 		.then((response) => {
 			if (response.status === 200) {
 				dispatch({
