@@ -12,25 +12,26 @@ export default function Compare({ match, history }) {
 	const { pokemon } = queryString.parse(history.location.search)
 	const dispatch = useDispatch()
 
-	const selectedPokemon = useSelector((state) => state.pokemon.selectedPokemon)
-	const options = useSelector((state) => state.pokemon.pokemons).map((item) => ({ value: item.name, label: item.name }))
+	const selected = useSelector((state) => state.pokemon.selected)
+	const options = null
 
 	const fetchPokemon = () => {
-		dispatch(ActionPokemon.getPokemon({ offset: 0, limit: 1 }))
+		dispatch(ActionPokemon.getPokemonDetailList({ offset: 0, limit: 1 }))
 	}
 	useEffect(fetchPokemon, [])
 
 	useEffect(() => {
-		dispatch(ActionPokemon.getPokemonDetail(pokemon[0]))
+		if (selected.length !== 1) dispatch(ActionPokemon.selectPokemon(pokemon[0]))
 	}, [history.location.search])
 
+	console.log(options)
 	return (
 		<Fragment>
 			<Layout>
 				<h1>Compare</h1>
 				<Select options={options} />
 				<div className='container detail'>
-					{selectedPokemon.map((detailPokemon) => (
+					{selected.map((detailPokemon) => (
 						<div className='detail__sprites'>
 							<div className='detail__title'>{detailPokemon?.name}</div>
 							<img
