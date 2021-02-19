@@ -14,7 +14,7 @@ export const getPokemon = (params) => (dispatch) => {
 					axios.get(`https://pokeapi.co/api/v2/pokemon/${index + offset + 1}`).then((response) => {
 						if (response.status === 200) {
 							dispatch({
-								type: Type.GET_POKEMON,
+								type: Type.GET_POKEMON_DETAIL_LIST,
 								payload: response.data,
 							})
 						}

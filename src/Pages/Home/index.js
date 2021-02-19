@@ -31,7 +31,7 @@ export default function Home() {
 
 	const resetData = () => {
 		dispatch({
-			type: Type.GET_POKEMON,
+			type: Type.GET_POKEMON_DETAIL_LIST,
 			payload: null,
 		})
 	}

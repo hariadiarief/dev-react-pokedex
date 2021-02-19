@@ -3,7 +3,7 @@ import * as Type from 'Types'
 const initalState = {
 	pokemons: [],
 	isHasMore: null,
-	pokemonDetail: null,
+	selectedPokemon: [],
 }
 
 export default (state = initalState, { type, payload }) => {
@@ -13,15 +13,15 @@ export default (state = initalState, { type, payload }) => {
 				...state,
 				isHasMore: payload,
 			}
-		case Type.GET_POKEMON:
-			return {
-				...state,
-				pokemons: state.pokemons.concat(payload),
-			}
 		case Type.GET_POKEMON_DETAIL:
 			return {
 				...state,
-				pokemonDetail: payload,
+				selectedPokemon: state.selectedPokemon.concat(payload),
+			}
+		case Type.GET_POKEMON_DETAIL_LIST:
+			return {
+				...state,
+				pokemons: state.pokemons.concat(payload),
 			}
 		default:
 			break

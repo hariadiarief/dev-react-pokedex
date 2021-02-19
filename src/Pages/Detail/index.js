@@ -9,7 +9,7 @@ import ImgBroken from 'Assets/broken.png'
 export default function DetailPokemon({ match }) {
 	const dispatch = useDispatch()
 
-	const detailPokemon = useSelector((state) => state.pokemon.pokemonDetail)
+	const detailPokemon = useSelector((state) => state.pokemon.selectedPokemon[0])
 	useEffect(() => {
 		dispatch(ActionPokemon.getPokemonDetail(match.params.id))
 	}, [match.params.id])
