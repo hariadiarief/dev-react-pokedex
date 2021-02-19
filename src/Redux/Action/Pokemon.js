@@ -37,7 +37,7 @@ export const getPokemonDetail = (id) => (dispatch) => {
 		.then((response) => {
 			if (response.status === 200) {
 				dispatch({
-					type: Type.GET_POKEMON,
+					type: Type.GET_DETAIL_POKEMON,
 					payload: response.data,
 				})
 			}

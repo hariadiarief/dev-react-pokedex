@@ -51,11 +51,11 @@ export default function Home() {
 						: pokemon.items.map((pokemon, index) => {
 								return (
 									<div className='home__grid__item' key={index}>
-										<Link className='home__grid__item__content' to={`/pokemon/${index + 1}`}>
+										<Link className='home__grid__item__content' to={`/pokemon/${pokemon.name}`}>
 											<img
 												alt={pokemon.name}
 												className='home__grid__item__content__image'
-												src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png` || ImgLoader}
+												src={pokemon.sprites.front_default || ImgLoader}
 												onError={(e) => {
 													e.target.onError = null
 													e.target.src = ImgBroken
