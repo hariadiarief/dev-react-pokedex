@@ -18,7 +18,7 @@ export default (state = initalState, { type, payload }) => {
 				...state,
 				pokemons: state.pokemons.concat(payload),
 			}
-		case Type.GET_DETAIL_POKEMON:
+		case Type.GET_POKEMON_DETAIL:
 			return {
 				...state,
 				pokemonDetail: payload,
