@@ -1,6 +1,21 @@
 import axios from 'axios'
 import * as Type from 'Types'
 
+export const getPokemonSimpleList = (params) => (dispatch) => {
+	const { limit, offset } = params
+	axios
+		.get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
+		.then((response) => {
+			if (response.status === 200) {
+				dispatch({
+					type: Type.GET_POKEMON_SIMPLE_LIST,
+					payload: response.data.results,
+				})
+			}
+		})
+		.catch((err) => console.log(err))
+}
+
 export const getPokemonDetail = (id) => (dispatch) => {
 	axios
 		.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
