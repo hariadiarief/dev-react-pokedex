@@ -1,15 +1,21 @@
-import { GET_POKEMON } from 'Types'
+import * as Type from 'Types'
 
 const initalState = {
 	pokemons: [],
+	isHasMore: null,
 }
 
-export default (state = initalState, action) => {
-	switch (action.type) {
-		case GET_POKEMON:
+export default (state = initalState, { type, payload }) => {
+	switch (type) {
+		case Type.GET_IS_HAS_MORE:
 			return {
 				...state,
-				pokemons: action.payload,
+				isHasMore: payload,
+			}
+		case Type.GET_POKEMON:
+			return {
+				...state,
+				pokemons: state.pokemons.concat(payload),
 			}
 		default:
 			break
