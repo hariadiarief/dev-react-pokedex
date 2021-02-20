@@ -21,7 +21,6 @@ export default function Type() {
 
 	const getPokemonByType = (e) => {
 		dispatch(ActionPokemon.getPokemonByType(e)).then((response) => {
-			console.log(response)
 			let temp = []
 			response.pokemon.forEach((item) => {
 				dispatch(ActionPokemon.getPokemonDetail(item.pokemon.name)).then((response) => {
@@ -31,8 +30,6 @@ export default function Type() {
 			})
 		})
 	}
-
-	console.log(detailPokemonType)
 
 	return (
 		<Layout>

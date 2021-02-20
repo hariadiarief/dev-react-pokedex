@@ -27,6 +27,7 @@ export default function Compare({ history }) {
 			: [queryString.parse(history.location.search).pokemon]
 		: []
 	const [selectedListDetail, setSelectedDetail] = useState([])
+	const totalAbility = selectedListDetail.map((item) => item.abilities.length).reduce((total, number) => total + number, 0)
 
 	useEffect(() => {
 		if (history.location.search && selectedList[0]) {
@@ -78,8 +79,8 @@ export default function Compare({ history }) {
 
 										<table className='detail__table'>
 											<tr>
-												<th>Info</th>
-												<th>Value</th>
+												<th>Win Rate</th>
+												<th>{((detailPokemon.abilities.length / totalAbility) * 100).toFixed(2)} %</th>
 											</tr>
 											<tr>
 												<td>species</td>
