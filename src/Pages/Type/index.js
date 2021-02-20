@@ -4,32 +4,13 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { useSelector, useDispatch } from 'react-redux'
 
 import * as ActionPokemon from 'Redux/Action/Pokemon'
-import * as Type from 'Types'
 import { Layout } from 'Components'
 
 import ImgBroken from 'Assets/broken.png'
 import ImgLoader from 'Assets/loader.gif'
-import pokemon from '../../Redux/Reducer/pokemon'
-import { getPokemonDetail } from '../../Redux/Action/Pokemon'
 
-export default function Home() {
+export default function Type() {
 	const dispatch = useDispatch()
-
-	const limit = 30
-	const [offset, setOffset] = useState(0)
-	// const pokemon = {
-	// 	items: useSelector((state) => state.pokemon.detailList),
-	// 	isHasMore: useSelector((state) => state.pokemon.isHasMore),
-	// }
-
-	// const fetchPokemon = () => {
-	// 	dispatch(ActionPokemon.getPokemonDetailList({ offset, limit }))
-	// }
-	// useEffect(fetchPokemon, [])
-
-	// useEffect(() => {
-	// 	if (pokemon.items.length !== 0) fetchPokemon({ offset, limit })
-	// }, [offset])
 
 	const [pokemonByType, setPokemonByType] = useState([])
 	const [detailPokemonType, setDetailPokemonType] = useState([])
@@ -39,44 +20,28 @@ export default function Home() {
 	}, [])
 
 	useEffect(() => {
-		if (pokemonByType?.length === 0)
-			dispatch(ActionPokemon.getPokemonType({})).then((response) => {
-				setPokemonByType(response)
-			})
-	}, [pokemonByType])
+		dispatch(ActionPokemon.getPokemonType({})).then((response) => {
+			setPokemonByType(response)
+		})
+	}, [])
 
 	useEffect(() => {
-		if (pokemonByType?.length !== 0) {
-			let temp = []
-			for (let index = 0; index < limit; index++) {
-				dispatch(ActionPokemon.getPokemonDetail(pokemonByType[index + offset + 1].pokemon.name)).then((response) => {
-					temp = temp.concat(response)
-					setDetailPokemonType(temp)
-				})
-			}
-		}
-	}, [pokemonByType, offset])
-
-	useEffect(() => {
-		if (pokemonByType?.length !== 0) {
+		if (pokemonByType.length !== 0) {
 			let temp = detailPokemonType
-			for (let index = 0; index < limit; index++) {
-				dispatch(ActionPokemon.getPokemonDetail(pokemonByType[index + offset + 1].pokemon.name)).then((response) => {
+			pokemonByType.forEach((item) => {
+				dispatch(ActionPokemon.getPokemonDetail(item.pokemon.name)).then((response) => {
 					temp = temp.concat(response)
 					setDetailPokemonType(temp)
 				})
-			}
+			})
 		}
-	}, [offset])
-
-	console.log('pokemonByType', detailPokemonType.length)
+	}, [pokemonByType])
 
 	return (
 		<Layout>
 			<div className='home'>
 				<div className='home__title'>Poke List</div>
-
-				<InfiniteScroll className='home__grid container' dataLength={detailPokemonType.length} next={() => setOffset(offset + limit)} hasMore={true} loader={renderLoader()}>
+				<div className='home__grid container'>
 					{detailPokemonType.length === 0
 						? null
 						: detailPokemonType.map((pokemon, index) => {
@@ -97,7 +62,8 @@ export default function Home() {
 									</div>
 								)
 						  })}
-				</InfiniteScroll>
+				</div>
+				`
 			</div>
 		</Layout>
 	)
