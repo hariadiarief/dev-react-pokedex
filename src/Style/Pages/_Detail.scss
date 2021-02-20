@@ -1,5 +1,7 @@
 .detail {
     display: flex;
+    flex-direction: column;
+    margin-top: 100px;
 }
 
 .detail__table {
