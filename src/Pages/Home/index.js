@@ -4,7 +4,6 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { useSelector, useDispatch } from 'react-redux'
 
 import * as ActionPokemon from 'Redux/Action/Pokemon'
-import * as Type from 'Types'
 import { Layout } from 'Components'
 
 import ImgBroken from 'Assets/broken.png'

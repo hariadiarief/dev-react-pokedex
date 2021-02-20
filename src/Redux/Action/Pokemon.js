@@ -1,19 +1,18 @@
 import axios from 'axios'
 import * as Type from 'Types'
 
-export const getPokemonSimpleList = (params) => (dispatch) => {
-	const { limit, offset } = params
-	axios
-		.get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
-		.then((response) => {
-			if (response.status === 200) {
-				dispatch({
-					type: Type.GET_POKEMON_SIMPLE_LIST,
-					payload: response.data.results,
-				})
-			}
-		})
-		.catch((err) => console.log(err))
+export const getPokemonSimpleList = (params) => async (dispatch) => {
+	return new Promise((resolve) => {
+		const { limit, offset } = params
+		axios
+			.get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
+			.then((response) => {
+				if (response.status === 200) {
+					resolve(response.data)
+				}
+			})
+			.catch((err) => console.log(err))
+	})
 }
 
 export const getPokemonType = (params) => async (dispatch) => {
@@ -80,17 +79,15 @@ export const getPokemonDetailList = (params) => (dispatch) => {
 		.catch((err) => console.log(err))
 }
 
-export const selectPokemon = (id) => (dispatch) => {
-	dispatch({ type: Type.RESET_SELECT_POKEMON_DETAIL })
-	axios
-		.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
-		.then((response) => {
-			if (response.status === 200) {
-				dispatch({
-					type: Type.SELECT_POKEMON_DETAIL,
-					payload: response.data,
-				})
-			}
-		})
-		.catch((err) => console.log(err))
+export const selectPokemonForCompare = (id) => async (dispatch) => {
+	return new Promise((resolve) => {
+		axios
+			.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+			.then((response) => {
+				if (response.status === 200) {
+					resolve(response.data)
+				}
+			})
+			.catch((err) => console.log(err))
+	})
 }
