@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import Select from 'react-select'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -12,36 +13,42 @@ import ImgLoader from 'Assets/loader.gif'
 export default function Type() {
 	const dispatch = useDispatch()
 
+	const [type, setType] = useState([])
 	const [pokemonByType, setPokemonByType] = useState([])
 	const [detailPokemonType, setDetailPokemonType] = useState([])
 
 	useEffect(() => {
-		dispatch(ActionPokemon.getPokemonType({}))
+		dispatch(ActionPokemon.getType()).then((response) => setType(response.results.map((item) => ({ label: item.name, value: item.name }))))
 	}, [])
 
-	useEffect(() => {
-		dispatch(ActionPokemon.getPokemonType({})).then((response) => {
-			setPokemonByType(response)
-		})
-	}, [])
+	// useEffect(() => {
+	// 	dispatch(ActionPokemon.getPokemonByType({})).then((response) => {
+	// 		setPokemonByType(response)
+	// 	})
+	// }, [])
 
-	useEffect(() => {
-		if (pokemonByType.length !== 0) {
-			let temp = detailPokemonType
-			pokemonByType.forEach((item) => {
+	const getPokemonByType = (e) => {
+		dispatch(ActionPokemon.getPokemonByType(e)).then((response) => {
+			// setPokemonByType(response)
+			console.log(response)
+			let temp = []
+			response.pokemon.forEach((item) => {
 				dispatch(ActionPokemon.getPokemonDetail(item.pokemon.name)).then((response) => {
 					temp = temp.concat(response)
 					setDetailPokemonType(temp)
 				})
 			})
-		}
-	}, [pokemonByType])
+		})
+	}
+
+	console.log(detailPokemonType)
 
 	return (
 		<Layout>
-			<div className='home'>
-				<div className='home__title'>Poke List</div>
-				<div className='home__grid container'>
+			<div className='home container'>
+				<div className='home__title'>Pokemon Type</div>
+				<Select placeholder='Select Pokemon' options={type} onChange={(e) => getPokemonByType(e.value)} />
+				<div className='home__grid '>
 					{detailPokemonType.length === 0
 						? null
 						: detailPokemonType.map((pokemon, index) => {

@@ -1,5 +1,5 @@
-import React, { useEffect, Fragment } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, Fragment, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Layout } from 'Components'
 
 import * as ActionPokemon from 'Redux/Action/Pokemon'
@@ -9,9 +9,9 @@ import ImgBroken from 'Assets/broken.png'
 export default function DetailPokemon({ match }) {
 	const dispatch = useDispatch()
 
-	const detailPokemon = useSelector((state) => state.pokemon.detail)
+	const [detailPokemon, setDetailPokemon] = useState(null)
 	useEffect(() => {
-		dispatch(ActionPokemon.getPokemonDetail(match.params.id))
+		dispatch(ActionPokemon.getPokemonDetail(match.params.id)).then((response) => setDetailPokemon(response))
 	}, [])
 
 	return (

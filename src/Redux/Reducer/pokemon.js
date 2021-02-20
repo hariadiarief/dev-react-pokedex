@@ -14,15 +14,8 @@ export default (state = initalState, { type, payload }) => {
 				...state,
 				detailList: {
 					...state.detailList,
-					items: state.detailList.items.concat(payload),
-				},
-			}
-		case Type.GET_POKEMON_DETAIL_LIST_IS_HAS_MORE:
-			return {
-				...state,
-				detailList: {
-					...state.detailList,
-					isHasMore: payload,
+					items: state.detailList.items.concat(payload.items),
+					isHasMore: payload.isHasMore,
 				},
 			}
 		default:
