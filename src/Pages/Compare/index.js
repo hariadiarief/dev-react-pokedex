@@ -61,12 +61,12 @@ export default function Compare({ history }) {
 						}}
 					/>
 
-					<div className='detail__grid'>
+					<div className='compare__detail__grid'>
 						{selectedList.length === 0
 							? null
 							: selectedListDetail.map((detailPokemon) => (
 									<div className='detail__sprites'>
-										<div className='detail__title'>{detailPokemon?.name}</div>
+										<div className='detail__sprites__title'>{detailPokemon?.name}</div>
 										<img
 											className='detail__sprites__img'
 											src={detailPokemon?.sprites.front_default ?? ImgLoader}
@@ -77,13 +77,13 @@ export default function Compare({ history }) {
 											alt='sprites.front_default'
 										/>
 
-										<table className='detail__table'>
+										<table className='detail__table__compare'>
 											<tr>
-												<th>Win Rate</th>
-												<th>{((detailPokemon.abilities.length / totalAbility) * 100).toFixed(2)} %</th>
+												<td>Win Rate</td>
+												<td>{((detailPokemon.abilities.length / totalAbility) * 100).toFixed(2)} %</td>
 											</tr>
 											<tr>
-												<td>species</td>
+												<td>Species</td>
 												<td>{detailPokemon?.species.name}</td>
 											</tr>
 											<tr>

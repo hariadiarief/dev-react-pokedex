@@ -18,8 +18,9 @@ export default function DetailPokemon({ match }) {
 		<Fragment>
 			<Layout>
 				<div className='container detail'>
+					<div className='detail__title'>{detailPokemon?.name}</div>
+
 					<div className='detail__sprites'>
-						<div className='detail__title'>{detailPokemon?.name}</div>
 						<img
 							className='detail__sprites__img'
 							src={detailPokemon?.sprites.front_default ?? ImgLoader}
