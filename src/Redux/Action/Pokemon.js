@@ -58,6 +58,7 @@ export const getPokemonDetailList = (params) => (dispatch) => {
 }
 
 export const selectPokemon = (id) => (dispatch) => {
+	dispatch({ type: Type.RESET_SELECT_POKEMON_DETAIL })
 	axios
 		.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
 		.then((response) => {

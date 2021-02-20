@@ -35,6 +35,11 @@ export default (state = initalState, { type, payload }) => {
 				...state,
 				selected: state.selected.concat(payload),
 			}
+		case Type.RESET_SELECT_POKEMON_DETAIL:
+			return {
+				...state,
+				selected: [],
+			}
 		default:
 			break
 	}

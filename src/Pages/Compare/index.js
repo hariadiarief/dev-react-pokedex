@@ -9,26 +9,43 @@ import ImgLoader from 'Assets/loader.gif'
 import ImgBroken from 'Assets/broken.png'
 
 export default function Compare({ match, history }) {
-	const { pokemon } = queryString.parse(history.location.search)
+	const pokemon = queryString.parse(history.location.search).pokemon
+		? typeof queryString.parse(history.location.search).pokemon === 'object'
+			? queryString.parse(history.location.search).pokemon
+			: [queryString.parse(history.location.search).pokemon]
+		: []
 	const dispatch = useDispatch()
 
 	const selected = useSelector((state) => state.pokemon.selected)
 	const options = useSelector((state) => state.pokemon.list).map((item) => ({ value: item.name, label: item.name }))
 
 	const fetchPokemon = () => {
-		dispatch(ActionPokemon.getPokemonSimpleList({ offset: 0, limit: 1000 }))
+		dispatch(ActionPokemon.getPokemonSimpleList({ offset: 0, limit: 100 }))
 	}
 	useEffect(fetchPokemon, [])
 
+	const handleCompare = (e) => {
+		history.push({ pathname: '/compare', search: `?${queryString.stringify({ pokemon: e.map((item) => item.value) })}` })
+	}
+
 	useEffect(() => {
-		pokemon.map((item) => dispatch(ActionPokemon.selectPokemon(item)))
+		if (history.location.search && pokemon[0]) pokemon.map((item) => dispatch(ActionPokemon.selectPokemon(item)))
 	}, [history.location.search])
+
+	console.log(pokemon.map((item) => ({ value: item })))
 
 	return (
 		<Fragment>
 			<Layout>
 				<h1>Compare</h1>
-				<Select options={options} isMulti onChange={(e) => console.log(e)} />
+				<Select
+					defaultValue={pokemon.map((item) => ({ value: item, label: item }))}
+					options={options}
+					isMulti
+					onChange={(e) => {
+						handleCompare(e)
+					}}
+				/>
 				<div className='container detail'>
 					{selected.map((detailPokemon) => (
 						<div className='detail__sprites'>
