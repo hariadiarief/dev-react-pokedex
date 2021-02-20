@@ -69,9 +69,8 @@ export const getPokemonDetailList = (params) => (dispatch) => {
 						}
 					})
 				)
-
 				dispatch({
-					type: Type.GET_IS_HAS_MORE,
+					type: Type.GET_POKEMON_DETAIL_LIST_IS_HAS_MORE,
 					payload: response.data.next !== null,
 				})
 			}

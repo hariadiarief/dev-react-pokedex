@@ -14,10 +14,7 @@ export default function Home() {
 
 	const limit = 30
 	const [offset, setOffset] = useState(0)
-	const pokemon = {
-		items: useSelector((state) => state.pokemon.detailList),
-		isHasMore: useSelector((state) => state.pokemon.isHasMore),
-	}
+	const pokemon = useSelector((state) => state.pokemon.detailList)
 
 	const fetchPokemon = () => {
 		dispatch(ActionPokemon.getPokemonDetailList({ offset, limit }))
