@@ -19,7 +19,8 @@ export default function Home() {
 	const fetchPokemon = () => {
 		dispatch(ActionPokemon.getPokemonDetailList({ offset, limit }))
 	}
-	useEffect(fetchPokemon, [dispatch, offset])
+	// eslint-disable-next-line
+	useEffect(fetchPokemon, [dispatch])
 
 	useEffect(() => {
 		if (pokemon.items.length !== 0) fetchPokemon({ offset, limit })
