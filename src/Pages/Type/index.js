@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Select from 'react-select'
-import InfiniteScroll from 'react-infinite-scroll-component'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import * as ActionPokemon from 'Redux/Action/Pokemon'
 import { Layout } from 'Components'
@@ -14,22 +13,14 @@ export default function Type() {
 	const dispatch = useDispatch()
 
 	const [type, setType] = useState([])
-	const [pokemonByType, setPokemonByType] = useState([])
 	const [detailPokemonType, setDetailPokemonType] = useState([])
 
 	useEffect(() => {
 		dispatch(ActionPokemon.getType()).then((response) => setType(response.results.map((item) => ({ label: item.name, value: item.name }))))
 	}, [])
 
-	// useEffect(() => {
-	// 	dispatch(ActionPokemon.getPokemonByType({})).then((response) => {
-	// 		setPokemonByType(response)
-	// 	})
-	// }, [])
-
 	const getPokemonByType = (e) => {
 		dispatch(ActionPokemon.getPokemonByType(e)).then((response) => {
-			// setPokemonByType(response)
 			console.log(response)
 			let temp = []
 			response.pokemon.forEach((item) => {

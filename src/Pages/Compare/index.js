@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Layout } from 'Components'
 import queryString from 'query-string'
 import Select from 'react-select'
