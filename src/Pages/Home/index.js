@@ -29,13 +29,6 @@ export default function Home() {
 		if (pokemon.items.length !== 0) fetchPokemon({ offset, limit })
 	}, [offset])
 
-	const resetData = () => {
-		dispatch({
-			type: Type.GET_POKEMON_DETAIL_LIST,
-			payload: null,
-		})
-	}
-
 	return (
 		<Layout>
 			<div className='home'>

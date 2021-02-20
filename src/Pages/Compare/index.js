@@ -41,6 +41,7 @@ export default function Compare({ history }) {
 					<div className='detail__title'>Compare Pokemon</div>
 
 					<Select
+						placeholder='Select Pokemon'
 						defaultValue={selectedList.map((item) => ({ value: item, label: item }))}
 						options={listOptions}
 						isMulti
