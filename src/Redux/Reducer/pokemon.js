@@ -6,6 +6,7 @@ const initalState = {
 	detail: null,
 	detailList: [],
 	selected: [],
+	pokemonByType: [],
 }
 
 export default (state = initalState, { type, payload }) => {
@@ -19,6 +20,11 @@ export default (state = initalState, { type, payload }) => {
 			return {
 				...state,
 				list: state.detailList.concat(payload),
+			}
+		case Type.GET_POKEMON_BY_TYPE:
+			return {
+				...state,
+				pokemonByType: payload,
 			}
 		case Type.GET_POKEMON_DETAIL:
 			return {

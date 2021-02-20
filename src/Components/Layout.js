@@ -62,6 +62,9 @@ class Layout extends Component {
 							<img src={ImgPokeball} alt='' />
 						</div>
 					</NavLink>
+					<NavLink to='/type' className='layout__header__navigation' activeClassName='layout__header__navigation--active'>
+						Type
+					</NavLink>
 					<NavLink to='/compare' className='layout__header__navigation' activeClassName='layout__header__navigation--active'>
 						Compare
 					</NavLink>
