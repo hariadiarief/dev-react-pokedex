@@ -1,7 +1,7 @@
 import axios from 'axios'
 import * as Type from 'Types'
 
-export const getPokemonSimpleList = (params) => async (dispatch) => {
+const getPokemonSimpleList = (params) => () => {
 	return new Promise((resolve) => {
 		const { limit, offset } = params
 		axios
@@ -15,7 +15,7 @@ export const getPokemonSimpleList = (params) => async (dispatch) => {
 	})
 }
 
-export const getType = (params) => async (dispatch) => {
+const getType = (params) => () => {
 	return new Promise((resolve) => {
 		return axios
 			.get(`https://pokeapi.co/api/v2/type`)
@@ -28,7 +28,7 @@ export const getType = (params) => async (dispatch) => {
 	})
 }
 
-export const getPokemonByType = (type) => async (dispatch) => {
+const getPokemonByType = (type) => () => {
 	return new Promise((resolve) => {
 		return axios
 			.get(`https://pokeapi.co/api/v2/type/${type}`)
@@ -41,7 +41,7 @@ export const getPokemonByType = (type) => async (dispatch) => {
 	})
 }
 
-export const getPokemonDetail = (id) => async (dispatch) => {
+const getPokemonDetail = (id) => () => {
 	return new Promise((resolve) => {
 		axios
 			.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
@@ -54,7 +54,7 @@ export const getPokemonDetail = (id) => async (dispatch) => {
 	})
 }
 
-export const getPokemonDetailList = (params) => (dispatch) => {
+const getPokemonDetailList = (params) => (dispatch) => {
 	const { limit, offset } = params
 
 	axios
@@ -79,7 +79,7 @@ export const getPokemonDetailList = (params) => (dispatch) => {
 		.catch((err) => console.log(err))
 }
 
-export const selectPokemonForCompare = (id) => async (dispatch) => {
+const selectPokemonForCompare = (id) => () => {
 	return new Promise((resolve) => {
 		axios
 			.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
@@ -91,3 +91,5 @@ export const selectPokemonForCompare = (id) => async (dispatch) => {
 			.catch((err) => console.log(err))
 	})
 }
+
+export { getPokemonSimpleList, getType, getPokemonByType, getPokemonDetail, getPokemonDetailList, selectPokemonForCompare }

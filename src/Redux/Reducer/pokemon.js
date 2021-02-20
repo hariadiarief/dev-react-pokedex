@@ -7,7 +7,7 @@ const initalState = {
 	},
 }
 
-export default (state = initalState, { type, payload }) => {
+const pokemon = (state = initalState, { type, payload }) => {
 	switch (type) {
 		case Type.GET_POKEMON_DETAIL_LIST:
 			return {
@@ -23,3 +23,5 @@ export default (state = initalState, { type, payload }) => {
 	}
 	return state
 }
+
+export default pokemon
