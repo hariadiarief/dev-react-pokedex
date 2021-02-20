@@ -12,7 +12,7 @@ export default function DetailPokemon({ match }) {
 	const [detailPokemon, setDetailPokemon] = useState(null)
 	useEffect(() => {
 		dispatch(ActionPokemon.getPokemonDetail(match.params.id)).then((response) => setDetailPokemon(response))
-	}, [])
+	}, [dispatch, match.params.id])
 
 	return (
 		<Fragment>

@@ -17,7 +17,7 @@ export default function Type() {
 
 	useEffect(() => {
 		dispatch(ActionPokemon.getType()).then((response) => setType(response.results.map((item) => ({ label: item.name, value: item.name }))))
-	}, [])
+	}, [dispatch])
 
 	const getPokemonByType = (e) => {
 		dispatch(ActionPokemon.getPokemonByType(e)).then((response) => {
@@ -62,15 +62,4 @@ export default function Type() {
 			</div>
 		</Layout>
 	)
-
-	function renderLoader() {
-		return Array.apply(null, Array(6)).map(() => (
-			<div className='home__grid__item'>
-				<Link className='home__grid__item__content'>
-					<img className='home__grid__item__content__image' src={ImgLoader} alt='loader' />
-					<span>Loading ...</span>
-				</Link>
-			</div>
-		))
-	}
 }

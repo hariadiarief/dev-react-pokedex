@@ -18,7 +18,7 @@ export default function Compare({ history }) {
 			setListOptions(response.results.map((item) => ({ value: item.name, label: item.name })))
 		)
 	}
-	useEffect(fetchListOptions, [])
+	useEffect(fetchListOptions, [dispatch])
 
 	// Action Select Pokemon
 	const selectedList = queryString.parse(history.location.search).pokemon
@@ -39,7 +39,8 @@ export default function Compare({ history }) {
 				})
 			)
 		}
-	}, [history.location.search])
+		// eslint-disable-next-line
+	}, [history.location.search, dispatch])
 
 	const handleCompare = (e) => {
 		history.push({ pathname: '/compare', search: `?${queryString.stringify({ pokemon: e.map((item) => item.value) })}` })
